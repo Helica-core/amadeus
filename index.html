@@ -7,11 +7,19 @@
         
         <meta name="viewport" content="width=device-width, initial-scale=0.5, minimum-scale=1.0, maximum-scale=4.0">
         </meta>
+        <style type="text/css">
+            div#container{width:70%;heitht:100%;}
+            div#header {background-color:#99bbbb;}
+            div#menu {background-color:#ffff99;height:100%;width:30%;float:right;}
+            div#content {background-color:#EEEEEE;height:100%;width:70%;float:left;}
+            div#footer {background-color:#99bbbb;clear:both;text-align:center;}
+        <style>
 
         <style>
             html, body {
                 oveflow: hidden;
-                height: 100%;
+                height: 70%;
+                width: 100%;
             }
             
             body{
@@ -26,9 +34,12 @@
                 left: 50%;
                 transform: translate(-50%, -50%);
                 */
-                background-size: 150%;
+                /*background-size: 70%;*/
+                height: 600px;
+                width: 150%;
+
                 background-position: 50% 50%;
-                background-image: url(assets/image/back_class_normal.png);
+                background-image: url(assets/image/ai-kurisu-2.png);
             }
             
             button {
@@ -88,19 +99,7 @@
 
     </head>
 
-    <body onload="sampleApp1()">
-    <!--
-        <p>
-            <button id="btnChange" class="active">Change Model</button>
-        </p>
-    -->
-        <div>
-            <canvas id="glcanvas" width="680" height="940" 
-                style="border:dashed 1px #CCC">
-            </canvas>
-        </div>
-        
-        <div id="myconsole" style="color:#000">---- Log ----</div>
+    <body onload="amadeus()">
 
         <!-- Live2D Library -->
         <script src="src/live2d/lib/live2d.min.js"></script>
@@ -115,34 +114,81 @@
         <script src="src/LAppDefine.js"></script>
         <script src="src/LAppModel.js"></script>
         <script src="src/LAppLive2DManager.js"></script>
-        <script src="src/SampleApp1.js"></script>
+        <script src="src/amadeus.js"></script>
 
         <!-- load jquery-->
         <script src="src/jquery.min.js"></script>
         
         <!-- post data-->
         <script type="text/javascript"  >
-        	function submit()
-        	{
-        		$.ajax(
-					{
-						url:"http://www.tuling123.com/openapi/api",
-						data:{
-        					"key":"af2c025e1d97e7c10d4ed3803f0e3d81",
-        					"info":msg.value,
-        					"userid":"2879985785"
-        				},
-        				type:'post',
-        				success:function(res){console.log(res.text);}
-					});
-        		msg.value = "";
-        	}
+            var cur_line = 1;
+            function submit()
+            {
+                var str = "test";
+                var msg = document.getElementById("msg");
+                $.ajax(
+                    {
+
+                        url:"http://www.tuling123.com/openapi/api",
+                        data:{
+                            "key":"af2c025e1d97e7c10d4ed3803f0e3d81",
+                            "info":msg.value,
+                            "userid":"2879985785"
+                        },
+                        type:'post',
+                        success:function(res){console.log(res.text);output.value+='kurisu:'+res.text+'\n';}
+                    });
+
+                document.getElementById("output").value+='you:'+msg.value+'\n';
+                var obj = document.getElementById("output");
+                //obj.value += cur_line+1;
+                obj.scrollTop = obj.scrollHeight;
+                msg.value = "";
+
+            }
+            function pressEnter(){
+                if(event.keyCode == 13){
+                    submit();
+                }
+            }
         </script>
-        
-        <p>
-          	<input type="text" name="chatmsg" id = "msg"/>
-        	<input type="submit" value="Submit" onclick="submit()" />
-        </p>
+
+        <div id="container">
+            <div id="header">
+                <h1> Amadeus System</h1>
+            </div>
+
+            <div id="content">
+                    <canvas id="glcanvas" width="680" height="940" 
+                        style="border:dashed 1px #CCC">
+                    </canvas>
+            </div>
+
+            <div id="footer"> 
+                <!--
+                <div id="myconsole" style="color:#000">---- Log ----</div>
+                -->
+
+                <div>
+
+                    <input type="text"  name="chatmsg" id = "msg" 
+                    autocomplete="off" autofocus="autofocus" 
+                    required="required" style="width:560px;"
+                    onkeydown="pressEnter();" 
+                    />
+                    
+                    <input type="submit" value="Submit" onclick="submit()" />
+
+                </div>
+                <div>
+                    <textarea id = "output" cols="100" rows="5" readonly="readonly">-----------记录----------
+                    </textarea>
+                </div>
+
+            </div>
+
+        </div>
+
     </body>
 
 
