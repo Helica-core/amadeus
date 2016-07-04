@@ -1,0 +1,62 @@
+/*
+html, body {
+    oveflow: hidden;
+    height: 70%;
+    width: 100%;
+}
+
+body{
+    margin:0px ;
+    padding:0px ;
+}
+*/
+
+#glcanvas {
+    background-image: url(../assets/image/ai-kurisu-2.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 100%;
+    height: 70%;
+}
+
+div#container{
+	width:80%;
+	height:90%;
+}
+
+div#header {
+	/*background-color:#99bbbb;*/
+	background-image: url(../assets/image/back-header.png); 
+	width: 100%;
+	height: 110px;
+}
+
+div#content {
+	width:100%;
+	background-image: url(../assets/image/back-header.png); 
+}
+
+img#logo{
+	width: 170px;
+	height: 114px;
+}
+
+div#footer {
+	width: 100%;
+	height: 100px;
+}
+
+textarea.chattable{
+	background:url(../assets/image/chat-table.png) no-repeat; 
+	background-size: 100%;
+	color: #ff8822;
+	width: 100%;
+	height: 130px;
+}
+
+input.ipt{
+	width: 90%;
+	color: #ff8822;
+	background-image: url(../assets/image/back-header.png); 
+}
+
